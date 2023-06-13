@@ -2,7 +2,8 @@ import { Fragment, useState } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../../form-input/form-input.component";
 import { type } from "@testing-library/user-event/dist/type";
-import Button from "../../button/button.component";
+import Button from "../button/button.component";
+import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -15,7 +16,7 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  console.log(formFields);
+  // console.log(formFields);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -63,7 +64,7 @@ const SignUpForm = () => {
 
         <FormInput label="Confirm password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}/>
 
-        <Button children="Sign up"/>
+        <Button label="Sign up"/>
 
       </form>
     </div>

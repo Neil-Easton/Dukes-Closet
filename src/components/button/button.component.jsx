@@ -6,13 +6,13 @@ const BUTTON_TYPE_CLASSES = {
   invereted: "invereted",
 };
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ label, buttonType, ...otherProps }) => {
   return (
     <button
       className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
       {...otherProps}
     >
-      {children}
+      {label}
     </button>
   );
 };
