@@ -4,9 +4,18 @@ import CartItem from '../cart-item/cart-item.component';
 
 import './cart-dropdown.styles.scss';
 import { CartContext } from '../../contexts/cart.context';
+import { useNavigate } from 'react-router-dom';
 
 const CartDropdown = () => {
-    const {cartItems} = useContext(CartContext);
+    const {cartItems, setCartOpen} = useContext(CartContext);
+
+    let navigate = useNavigate();
+
+    const redirectCheckOutPage = (event) => {
+        event.preventDefault();
+        setCartOpen(false);
+        navigate("/checkout");
+    }
 
     return (
         <div className='cart-dropdown-container'>
@@ -17,7 +26,7 @@ const CartDropdown = () => {
                     )
                 }))}
             </div>
-            <Button label="GO TO CHECKOUT"></Button>
+            <Button label="GO TO CHECKOUT" onClick={redirectCheckOutPage}></Button>
         </div>
     )
 }
