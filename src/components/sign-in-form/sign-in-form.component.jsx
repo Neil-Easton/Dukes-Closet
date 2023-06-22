@@ -85,7 +85,7 @@ const SignInForm = () => {
         <div style={{ display: "flex", gap: "15px" }}>
           <Button type="submit" label="Sign in" />
           <Button
-            type="button"
+            buttonType="google"
             label="Sign in with Google"
             onClick={logGoogleUser}
             className="button-container google-sign-in"
