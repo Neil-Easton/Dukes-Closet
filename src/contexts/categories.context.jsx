@@ -1,28 +1,30 @@
-import { createContext, useState, useEffect } from "react";
+// Replaced by Redux implementaion
 
-import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils.js";
+// import { createContext, useState, useEffect } from "react";
 
-export const CategoriesContext = createContext({
-  categoriesMap: {},
-  setCategoriesMap: () => {},
-});
+// import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils.js";
 
-export const CategoriesProvider = ({ children }) => {
-  const [categoriesMap, setCategoriesMap] = useState({});
+// export const CategoriesContext = createContext({
+//   categoriesMap: {},
+//   setCategoriesMap: () => {},
+// });
 
-  useEffect(() => {
-    const getCategoryMap = async () => {
-      const categoriesMap = await getCategoriesAndDocuments();
-      setCategoriesMap(categoriesMap);
-      // console.log(categoriesMap);
-    };
-    getCategoryMap();
-  }, []);
+// export const CategoriesProvider = ({ children }) => {
+//   const [categoriesMap, setCategoriesMap] = useState({});
 
-  const value = { categoriesMap, setCategoriesMap };
-  return (
-    <CategoriesContext.Provider value={value}>
-      {children}
-    </CategoriesContext.Provider>
-  );
-};
+//   useEffect(() => {
+//     const getCategoryMap = async () => {
+//       const categoriesMap = await getCategoriesAndDocuments();
+//       setCategoriesMap(categoriesMap);
+//       // console.log(categoriesMap);
+//     };
+//     getCategoryMap();
+//   }, []);
+
+//   const value = { categoriesMap, setCategoriesMap };
+//   return (
+//     <CategoriesContext.Provider value={value}>
+//       {children}
+//     </CategoriesContext.Provider>
+//   );
+// };

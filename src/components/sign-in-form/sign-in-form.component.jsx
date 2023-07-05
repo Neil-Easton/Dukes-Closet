@@ -1,13 +1,12 @@
 import { useState, useContext } from "react";
 import {
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  createAuthUserWithEmailAndPassword,
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../../form-input/form-input.component";
 import Button from "../button/button.component";
 import { UserContext } from "../../contexts/user.context";
+import { emailSignInStart, googleSignInStart } from "../../store/user/user.action";
+import { useDispatch } from "react-redux";
 
 const defaultFormFields = {
   email: "",
@@ -15,13 +14,16 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+
   const [formField, setFormField] = useState(defaultFormFields);
   const { email, password } = formField;
 
-  const {setCurrentUser} = useContext(UserContext);
+  // const {setCurrentUser} = useContext(UserContext);
+  
 
   const logGoogleUser = async () => {
-    const response = await signInWithGooglePopup();
+    dispatch(googleSignInStart());
     // console.log(response);
   };
 
@@ -40,23 +42,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-
-        const response = await signInUserWithEmailAndPassword(email, password);
-
-    } catch (err) {
-        switch(err.code) {
-            case "auth/wrong-password": 
-                alert("Wrong account or password");
-                break;
-            case "auth/user-not-found":
-                alert("Wrong account or password");
-                break;
-            default:
-                alert("Error logging in user");
-        }
-        console.log(err);
-    } 
+    dispatch(emailSignInStart(email, password));
 
     setDefaultFormField();
   };

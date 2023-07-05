@@ -65,20 +65,23 @@ export const getCategoriesAndDocuments = async () => {
     const q = query(collectionRef);
 
     const querySnapshot = await getDocs(q);
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-        const {title, items} = docSnapshot.data();
-        acc[title.toLowerCase()] = {title: title, items: items};
-        // acc[title.toLowerCase()] = items;
-        return acc;
-    }, {});
+    const categoriesArray = querySnapshot.docs.map((docSnapShot) => docSnapShot.data())
 
-    return categoryMap;
+    // const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    //     const {title, items} = docSnapshot.data();
+    //     acc[title.toLowerCase()] = {title: title, items: items};
+    //     // acc[title.toLowerCase()] = items;
+    //     return acc;
+    // }, {});
+
+    return categoriesArray;
 }
 
 export const createUserDocumentFromAuth = async (
-  { user },
+  {user},
   additionalInfo = {}
 ) => {
+  // console.log(user);
   const userDocRef = doc(db, "users", user.uid);
 
   // console.log(userDocRef);
@@ -87,6 +90,7 @@ export const createUserDocumentFromAuth = async (
 
   // console.log(userSnapShot);
   // console.log(userSnapShot.exists());
+  // console.log(userSnapShot.data());
   if (!userSnapShot.exists()) {
     const { email, displayName } = user;
     const createdAt = new Date();
@@ -103,7 +107,7 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  return userDocRef;
+  return userSnapShot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -126,3 +130,16 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    )
+  })
+}

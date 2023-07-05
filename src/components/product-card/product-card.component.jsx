@@ -3,14 +3,17 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 
 import {ProductCardStyledDiv, TagStyledDiv} from "./product-card.styles.jsx";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../store/cart/cart.action";
 
 const ProductCard = ({product}) => {
     const {name, imageUrl, price} = product;
 
-    const {addItemToCart} = useContext(CartContext);
+    // const {addItemToCart} = useContext(CartContext);
+    const dispatch = useDispatch();
 
     const onClickHandler = () => {
-        addItemToCart(product);
+        dispatch(addItemToCart(product));
     }
 
     return (
