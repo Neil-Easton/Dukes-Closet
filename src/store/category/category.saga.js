@@ -21,6 +21,4 @@ export function* onFetchCategories() {
 
 export function* categoriesSaga() {
     yield all([call(onFetchCategories)]);
-
-
 }

@@ -7,6 +7,7 @@ import { UserContext } from "../../contexts/user.context";
 import {SignUpContainerStyledDiv} from "./sign-up-form.styles.jsx";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/user/user.action";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   displayName: "",
@@ -20,6 +21,7 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // const {setCurrentUser} = useContext(UserContext);
 
@@ -38,6 +40,7 @@ const SignUpForm = () => {
     dispatch(signUp(email, password, displayName));
 
     resetFormFields();
+    navigate('/');
   }
 
   const handleChange = (event) => {

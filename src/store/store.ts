@@ -1,4 +1,4 @@
-import {compose, createStore, applyMiddleware} from 'redux';
+import {compose, createStore, applyMiddleware, Middleware} from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
@@ -8,9 +8,17 @@ import createSagaMiddleware from 'redux-saga';
 
 import { rootReducer } from './root-reducer';
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 const sagaMiddleware = createSagaMiddleware();
 
-const middleWares = [ process.env.NODE_ENV === 'development' && logger, sagaMiddleware].filter(Boolean);
+const middleWares = [ process.env.NODE_ENV === 'development' && logger, sagaMiddleware].filter((middleware): middleware is Middleware => Boolean(middleware));
+
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
 
 const persistConfig = {
     key: 'root',

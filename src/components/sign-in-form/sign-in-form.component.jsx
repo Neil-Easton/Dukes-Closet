@@ -7,6 +7,7 @@ import Button from "../button/button.component";
 import { UserContext } from "../../contexts/user.context";
 import { emailSignInStart, googleSignInStart } from "../../store/user/user.action";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   email: "",
@@ -15,6 +16,7 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formField, setFormField] = useState(defaultFormFields);
   const { email, password } = formField;
@@ -45,6 +47,7 @@ const SignInForm = () => {
     dispatch(emailSignInStart(email, password));
 
     setDefaultFormField();
+    navigate('/');
   };
 
   return (

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
-} from "../../../../store/category/category.selector.js";
+} from "../../../../store/category/category.selector.ts";
 
 const Category = () => {
   const { category } = useParams();
