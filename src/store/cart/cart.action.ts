@@ -26,7 +26,7 @@ export const addItemToCart = withMatcher((productToAdd = {} as CartItem, cartIte
     cartItems = cartItems.map((cartItem) => {
         if(cartItem.id === productToAdd.id) {
             added = true;
-            return {...cartItem, quantity: cartItem.quantity+1};
+            return {...cartItem, quantity: cartItem.quantity && cartItem.quantity+1};
         }
         else {
             return cartItem;
@@ -57,7 +57,7 @@ export const deleteItemFromCart = withMatcher((cartItems=[] as CartItem[], produ
     }
     else {
         updatedCartItems = cartItems.map(cartItem => {
-            return cartItem.id === productToDelete.id ? {...cartItem, quantity: cartItem.quantity-1} : cartItem;
+            return cartItem.id === productToDelete.id ? {...cartItem, quantity: cartItem.quantity && cartItem.quantity-1} : cartItem;
         })
     }
 

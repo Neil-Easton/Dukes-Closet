@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 import FormInput from "../../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 
-import {SignUpContainerStyledDiv} from "./sign-up-form.styles.jsx";
+import {SignUpContainerStyledDiv} from "./sign-up-form.styles";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/user/user.action";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -43,7 +43,7 @@ const SignUpForm = () => {
     navigate('/');
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
     setFormFields({
         ...formFields, [name]: value

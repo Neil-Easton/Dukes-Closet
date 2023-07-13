@@ -1,6 +1,6 @@
-import CategoryItem from '../category-item/category-item.component';
+import CategoryItemCompo from '../category-item/category-item.component';
 
-import {CategoriesContainerStyledDiv} from './directory.styles.jsx';
+import {CategoriesContainerStyledDiv} from './directory.styles';
 
 const categories = [
     {
@@ -34,7 +34,7 @@ const Directory = () => {
     return (
         <CategoriesContainerStyledDiv>
             {categories.map((category) => {
-                return <CategoryItem key={category.id} Category={category}/>
+                return <CategoryItemCompo key={category.id} Category={category}/>
             })}
         </CategoriesContainerStyledDiv>
     )

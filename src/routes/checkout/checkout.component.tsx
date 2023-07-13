@@ -3,7 +3,7 @@ import { useContext } from "react";
 // import { CartContext } from "../../contexts/cart.context";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
-import {CheckoutContainerStyledDiv, CheckoutHeaderStyledDiv, HeaderBlockStyledH2, TotalStyledDiv} from "./checkout.styles.jsx";
+import {CheckoutContainerStyledDiv, CheckoutHeaderStyledDiv, HeaderBlockStyledH2, TotalStyledDiv} from "./checkout.styles";
 import { useSelector } from "react-redux";
 
 const Checkout = () => {
@@ -13,7 +13,8 @@ const Checkout = () => {
     let sum = 0;
 
     for (let item of cartItems) {
-      sum += item.price * item.quantity;
+      if (item.quantity)
+        sum += item.price * item.quantity;
     }
 
     return sum;

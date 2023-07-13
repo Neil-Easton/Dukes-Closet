@@ -6,13 +6,13 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 
 // import { UserContext } from "../../contexts/user.context";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
 import { auth, signOutUser } from "../../utils/firebase/firebase.utils";
-import { setCurrentUser, signOut } from "../../store/user/user.action";
+import { signOutAction } from "../../store/user/user.action";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
-import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles.jsx";
+import {NavigationContainer, LogoContainer, NavLinksContainer, NavLink} from "./navigation.styles";
 import { useDispatch } from "react-redux";
 
 const Navigation = () => {
@@ -25,7 +25,7 @@ const Navigation = () => {
   const isCartOpen = useSelector(selectIsCartOpen);
   
   const signOutHandler = () => {
-    dispatch(signOut());
+    dispatch(signOutAction());
   }
 
   return (

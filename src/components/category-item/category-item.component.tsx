@@ -1,12 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import {CategoryContainerStyledDiv, BackgroundImageStyledDiv, CategoryBodyContainerStyledDiv} from './category-item.styles.jsx'
+import {CategoryContainerStyledDiv, BackgroundImageStyledDiv, CategoryBodyContainerStyledDiv} from './category-item.styles'
+import { CategoryItem } from '../../store/category/category.types';
+import React from 'react';
 
-const CategoryItem = ({Category}) => {
+const CategoryItemCompo = ({Category}: {Category: {id: number, title: string, imageUrl: string}}) => {
 
     const {id, title, imageUrl} = Category;
     const navigate = useNavigate();
 
-    const redirectCategory = (event) => {
+    const redirectCategory = (event: React.MouseEvent) => {
       event.preventDefault();
 
       navigate(`/shop/${title}`);
@@ -23,4 +25,4 @@ const CategoryItem = ({Category}) => {
       );
 }
 
-export default CategoryItem;
+export default CategoryItemCompo;

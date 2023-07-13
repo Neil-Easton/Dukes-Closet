@@ -1,13 +1,15 @@
 import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+// import { CartContext } from "../../contexts/cart.context";
 import { addItemToCart, deleteItemFromCart } from "../../store/cart/cart.action";
 
-import {CheckoutItemContainerStyledDiv} from "./checkout-item.styles.jsx";
+import {CheckoutItemContainerStyledDiv} from "./checkout-item.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
+import { CartItem } from "../../store/cart/cart.types";
 
-const CheckoutItem = ({ cartItem }) => {
-  const { name, imageUrl, quantity, price } = cartItem;
+const CheckoutItem = ({ cartItem }: {cartItem: CartItem}) => {
+  // maybe the price type here is string
+  const { name, imageUrl, quantity, price } = cartItem as CartItem&{name: string, imageUrl: string, price: number};
   // const { deleteItemFromCart } = useContext(CartContext);
   const cartItems = useSelector(selectCartItems);
 

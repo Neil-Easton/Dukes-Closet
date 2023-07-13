@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../contexts/user.context";
+// import { UserContext } from "../../contexts/user.context";
 import { emailSignInStart, googleSignInStart } from "../../store/user/user.action";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,8 @@ const SignInForm = () => {
   
 
   const logGoogleUser = async () => {
-    dispatch(googleSignInStart());
+    dispatch(googleSignInStart(navigate));
+
     // console.log(response);
   };
 
@@ -33,15 +34,15 @@ const SignInForm = () => {
     setFormField(defaultFormFields);
   }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = (event: React.ChangeEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
     setFormField({
       ...formField,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     dispatch(emailSignInStart(email, password));

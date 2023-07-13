@@ -6,7 +6,8 @@ export enum CART_ACTION_TYPE {
 
 export type CartItem = {
     id: number,
-    quantity: number,
+    price: number,
+    quantity?: number,
 }
 
 

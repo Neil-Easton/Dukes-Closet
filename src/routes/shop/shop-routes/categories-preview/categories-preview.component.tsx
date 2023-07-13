@@ -1,5 +1,5 @@
 import { useContext, Fragment } from "react";
-import { CategoriesContext } from "../../../../contexts/categories.context";
+// import { CategoriesContext } from "../../../../contexts/categories.context";
 import ProductCard from "../../../../components/product-card/product-card.component";
 import Spinner from "../../../../components/spinner/spinner.component";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,13 @@ import {
   ItemListStyledDiv,
   LoadMoreCardStyledDiv,
   LoadMoreButtonStyledH1,
-} from "./categories-preview.styles.jsx";
+} from "./categories-preview.styles";
 import { useSelector } from "react-redux";
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
 } from "../../../../store/category/category.selector";
+import { CategoryItem } from "../../../../store/category/category.types";
 
 const CategoriesPreview = () => {
   // const { categoriesMap } = useContext(CategoriesContext);
@@ -21,11 +22,11 @@ const CategoriesPreview = () => {
   const isLoading = useSelector(selectCategoriesIsLoading);
   const navigate = useNavigate();
 
-  const redirectCategory = (name) => {
+  const redirectCategory = (name: string) => {
     navigate(`/shop/${name}`);
   };
 
-  const displayThumbnail = (products, name) => {
+  const displayThumbnail = (products: CategoryItem[], name: string) => {
     const thumbnail = [];
 
     for (let i = 0; i < 4; i++) {
